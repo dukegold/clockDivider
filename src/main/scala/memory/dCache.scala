@@ -36,7 +36,8 @@ class dCache (val NUM_PORTS: Int = 8) extends Module with RequireAsyncReset {
       }
   }
   cmdArbiterInst.io.out.ready := 1.U
-
+  val validPipe = RegInit(UInt(1.W),1.U)
+  validPipe := cmdArbiterInst.io.out.valid
   rData(0).bits <> memDataOut
   rData(1).bits <> memDataOut
   rData(2).bits <> memDataOut
@@ -53,5 +54,5 @@ class dCache (val NUM_PORTS: Int = 8) extends Module with RequireAsyncReset {
   rData(5).valid := 0.U
   rData(6).valid := 0.U
   rData(7).valid := 0.U
-  rData(arbChosenPipe).valid := cmdArbiterInst.io.out.valid
+  rData(arbChosenPipe).valid := validPipe
 }
