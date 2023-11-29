@@ -5,7 +5,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 class BasicTest extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "dCache"
   // test class body here
-  it should "do something" in {
+  it should "read and write correctly." in {
     test(new dCache(NUM_PORTS = 8)).withAnnotations(Seq(VerilatorBackendAnnotation,WriteFstAnnotation)) { c =>
       c.clock.step(20)
       c.requestor(0).valid.poke(true.B)
